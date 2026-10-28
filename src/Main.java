@@ -5,25 +5,36 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
 
-        String name = scanner.next();
-        double percentage = scanner.nextDouble();
-        int backlogs = scanner.nextInt();
-        int graduationYear = scanner.nextInt();
+            String name = scanner.next();
+            double percentage = scanner.nextDouble();
+            int backlogs = scanner.nextInt();
+            int graduationYear = scanner.nextInt();
 
-        Candidate candidate = new Candidate(
-                name,
-                percentage,
-                backlogs,
-                graduationYear
-        );
+            Candidate candidate = new Candidate(
+                    name,
+                    percentage,
+                    backlogs,
+                    graduationYear
+            );
 
-        System.out.println("Candidate: " + candidate.getName());
-        System.out.println("Percentage: " + candidate.getPercentage());
-        System.out.println("Backlogs: " + candidate.getBacklogs());
-        System.out.println("Graduation Year: " + candidate.getGraduationYear());
+            Job job = new Job(
+                    "TCS",
+                    "Java Developer",
+                    60.0,
+                    2,
+                    2026
+            );
 
-        scanner.close();
+            EligibilityChecker checker = new EligibilityChecker();
+
+            boolean eligible = checker.isEligible(candidate, job);
+
+            System.out.println("Candidate: " + candidate.getName());
+            System.out.println("Company: " + job.getCompany());
+            System.out.println("Role: " + job.getRole());
+            System.out.println("Result: " + (eligible ? "Eligible" : "Not Eligible"));
+        }
     }
 }
