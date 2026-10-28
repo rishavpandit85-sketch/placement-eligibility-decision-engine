@@ -27,12 +27,29 @@ public class Main {
                     2026
             );
 
-            System.out.println("Candidate: " + candidate.getName());
-            System.out.println("Company: " + job.getCompany());
-            System.out.println("Role: " + job.getRole());
-            System.out.println("Minimum Percentage: " + job.getMinimumPercentage());
-            System.out.println("Maximum Backlogs: " + job.getMaximumBacklogs());
-            System.out.println("Required Graduation Year: " + job.getRequiredGraduationYear());
+            EligibilityRule percentageRule = new PercentageRule();
+            EligibilityRule backlogRule = new BacklogRule();
+            EligibilityRule graduationYearRule = new GraduationYearRule();
+
+            boolean percentagePass = percentageRule.check(candidate, job);
+            boolean backlogPass = backlogRule.check(candidate, job);
+            boolean yearPass = graduationYearRule.check(candidate, job);
+
+            System.out.println("Percentage     : "
+                    + (percentagePass ? "PASS" : "FAIL"));
+
+            System.out.println("Backlogs       : "
+                    + (backlogPass ? "PASS" : "FAIL"));
+
+            System.out.println("Graduation Year: "
+                    + (yearPass ? "PASS" : "FAIL"));
+
+            boolean eligible = percentagePass
+                    && backlogPass
+                    && yearPass;
+
+            System.out.println("Final Result   : "
+                    + (eligible ? "ELIGIBLE" : "NOT ELIGIBLE"));
         }
     }
 }
