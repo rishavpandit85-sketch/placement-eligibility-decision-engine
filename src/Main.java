@@ -20,21 +20,19 @@ public class Main {
             );
 
             Job job = new Job(
-                    "TCS",
+                    "Infosys",
                     "Java Developer",
-                    60.0,
-                    2,
+                    65.0,
+                    0,
                     2026
             );
-
-            EligibilityChecker checker = new EligibilityChecker();
-
-            boolean eligible = checker.isEligible(candidate, job);
 
             System.out.println("Candidate: " + candidate.getName());
             System.out.println("Company: " + job.getCompany());
             System.out.println("Role: " + job.getRole());
-            System.out.println("Result: " + (eligible ? "Eligible" : "Not Eligible"));
+            System.out.println("Minimum Percentage: " + job.getMinimumPercentage());
+            System.out.println("Maximum Backlogs: " + job.getMaximumBacklogs());
+            System.out.println("Required Graduation Year: " + job.getRequiredGraduationYear());
         }
     }
 }
